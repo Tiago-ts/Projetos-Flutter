@@ -1,4 +1,4 @@
-package com.example.frases;
+package com.example.meuapp;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
