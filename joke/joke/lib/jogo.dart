@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class jogo extends StatefulWidget {
@@ -6,6 +8,44 @@ class jogo extends StatefulWidget {
 }
 
 class _jogoState extends State<jogo> {
+
+  var _imagemApp = AssetImage("imagens/padrao.png");
+  var _mensagem = "Escolha uma opção abaixo";
+
+   void _opcaoSelecionada(String escolhaUsuario){
+
+     print("Opcao selecionada " + escolhaUsuario);
+
+     var opcoes = ["pedra", "papel", "tesoura"];
+     var numero = Random().nextInt(3);
+     var escolhaApp = opcoes[numero];
+
+     print("Escolha do App " + escolhaApp);
+
+
+     switch(escolhaApp){
+
+       case "pedra":
+         setState(() {
+           this._imagemApp = AssetImage("imagens/pedra.png");
+         });
+         break;
+
+       case "papel":
+         setState(() {
+           this._imagemApp = AssetImage("imagens/papel.png");
+         });
+         break;
+
+       case "tesoura":
+         setState(() {
+           this._imagemApp = AssetImage("imagens/tesoura.png");
+         });
+         break;
+     }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,12 +78,12 @@ class _jogoState extends State<jogo> {
             ),
           ),
 
-          Image.asset("imagens/padrao.png"),
+          Image(image: this._imagemApp),
 
           Padding(
             padding: EdgeInsets.only(top: 32, bottom: 16),
             child: Text(
-              "Escolha uma Opção Abaixo",
+              this._mensagem,
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 20,
@@ -56,9 +96,24 @@ class _jogoState extends State<jogo> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
+
+              GestureDetector(
+                onTap: () => _opcaoSelecionada("pedra"),
+                child:Image.asset("imagens/pedra.png", height: 99,) ,
+              ),
+              GestureDetector(
+                  onTap: () => _opcaoSelecionada("papel"),
+                  child:Image.asset("imagens/papel.png", height: 99,)
+              ),
+              GestureDetector(
+                  onTap: () => _opcaoSelecionada("tesoura"),
+                  child:Image.asset("imagens/tesoura.png", height: 99,)
+              ),
+              /*
               Image.asset("imagens/pedra.png", height: 99,),
               Image.asset("imagens/papel.png" , height: 99,),
               Image.asset("imagens/tesoura.png" , height: 99,),
+              */
 
             ],
           )
