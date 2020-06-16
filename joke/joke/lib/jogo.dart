@@ -11,6 +11,7 @@ class _jogoState extends State<jogo> {
 
   var _imagemApp = AssetImage("imagens/padrao.png");
   var _mensagem = "Escolha uma opção abaixo";
+  var _msg ="Escolha uma opção abaixo";
 
    void _opcaoSelecionada(String escolhaUsuario){
 
@@ -22,7 +23,7 @@ class _jogoState extends State<jogo> {
 
      print("Escolha do App " + escolhaApp);
 
-
+               //Escolha da maquina
      switch(escolhaApp){
 
        case "pedra":
@@ -43,6 +44,31 @@ class _jogoState extends State<jogo> {
          });
          break;
      }
+
+     //Selecionando o Ganhador
+     //Usuario Ganhador
+
+     if (
+        (escolhaUsuario == "pedra" && escolhaApp == "tesoura") ||
+        (escolhaUsuario == "tesoura" && escolhaApp == "papel") ||
+        (escolhaUsuario == "papel" && escolhaApp == "pedra")
+     ){
+
+       this._mensagem = "Você Ganhou!!";
+
+       //App Ganhador
+     } else if (
+         (escolhaApp == "pedra" && escolhaUsuario == "tesoura") ||
+         (escolhaApp == "tesoura" && escolhaUsuario == "papel") ||
+         (escolhaApp == "papel" && escolhaUsuario == "pedra")
+     ){
+       this._mensagem = "Você Perdeu!!";
+
+       //App empatou com usuario
+     }else{
+       this._mensagem = "Empatou!!";
+     }
+     
 
   }
 
