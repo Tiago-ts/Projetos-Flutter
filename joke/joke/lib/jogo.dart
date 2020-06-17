@@ -23,7 +23,7 @@ class _jogoState extends State<jogo> {
 
      print("Escolha do App " + escolhaApp);
 
-               //Escolha da maquina
+               //Escolha da máquina
      switch(escolhaApp){
 
        case "pedra":
