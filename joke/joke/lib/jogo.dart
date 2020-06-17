@@ -68,7 +68,7 @@ class _jogoState extends State<jogo> {
      }else{
        this._mensagem = "Empatou!!";
      }
-     
+
 
   }
 
