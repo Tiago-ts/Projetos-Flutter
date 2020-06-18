@@ -8,7 +8,49 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   TextEditingController _controllerAlcool = TextEditingController();
-  TextEditingController _controllergasolina = TextEditingController();
+  TextEditingController _controllerGasolina = TextEditingController();
+
+  String _textoResultado = " ";
+  String _Resultado = " ";
+
+    void _calcular(){
+
+    double precoAlcool = double.tryParse(_controllerAlcool.text);
+    double precoGasolina = double.tryParse(_controllerGasolina.text);
+
+    if ( precoAlcool== null || precoGasolina == null){
+      print("Número inválido, digite números maiores que 0 e utilizando ( . )");
+      setState(() {
+        _Resultado = "Número inválido, digite números maiores que 0 e utilizando ( . )";
+        _textoResultado = " ";
+      });
+    }else{
+      if( (precoAlcool / precoGasolina ) >= 0.7){
+      setState(() {
+        _textoResultado = "Melhor abastecer com gasolina";
+        _Resultado = " ";
+
+      });
+
+      }else{
+        setState(() {
+          _textoResultado = "Melhor abastecer com álcool";
+          _Resultado = " ";
+
+        });
+
+      }
+
+    }
+
+    _limpar();
+
+  }
+
+  void _limpar(){
+      _controllerAlcool.text = "";
+      _controllerGasolina.text = "";
+  }
 
 
   @override
@@ -57,6 +99,7 @@ class _HomeState extends State<Home> {
                   labelText: "Preço Álcool, ex: 1.62",
                 ),
                 style: TextStyle(
+                    color: Colors.black,
                     fontSize: 22
                 ),
 
@@ -65,16 +108,24 @@ class _HomeState extends State<Home> {
 
 
               TextField(
+
                 keyboardType: TextInputType.number,
+
                 decoration: InputDecoration(
+
                   labelText: "Preço Gasolina, ex: 3.99",
+
 
                 ),
 
                 style: TextStyle(
-                    fontSize: 22
+                  color: Colors.black,
+                    fontSize: 22,
+
+
+
                 ),
-                controller: _controllergasolina,
+                controller: _controllerGasolina,
 
               ),
 
@@ -95,20 +146,31 @@ class _HomeState extends State<Home> {
                           fontSize: 20
                       ),
                     ),
-                    onPressed: (){}
+                    onPressed: _calcular
                 ),
               ),
-
               Padding(padding: EdgeInsets.only(top: 30),
-                child: Text(
-                  "Resultado",
+                child: Text(_Resultado ,
                   textAlign: TextAlign.center,
                   style: TextStyle(
+                      color: Colors.red,
                       fontSize: 22,
                       fontWeight: FontWeight.bold
                   ),
                 ),
+              ),
 
+
+
+              Padding(padding: EdgeInsets.only(top: 0),
+                child: Text(_textoResultado ,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.green,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold
+                  ),
+                ),
               )
 
 
