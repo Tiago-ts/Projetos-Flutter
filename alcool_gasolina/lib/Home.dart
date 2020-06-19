@@ -134,10 +134,12 @@ class _HomeState extends State<Home> {
               Padding(
 
                 padding: EdgeInsets.only(top: 20),
+
                 child: RaisedButton(
 
                     color: Colors.blue,
                     textColor: Colors.white,
+                    
                     padding: EdgeInsets.all(15),
                     child: Text(
 
@@ -148,6 +150,7 @@ class _HomeState extends State<Home> {
                     ),
                     onPressed: _calcular
                 ),
+
               ),
               Padding(padding: EdgeInsets.only(top: 30),
                 child: Text(_Resultado ,
