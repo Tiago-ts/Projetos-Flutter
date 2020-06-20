@@ -19,6 +19,7 @@ class _HomeState extends State<Home> {
 
   var _frases = [
 
+    "Todo muda quando você muda sua mentalidade!",
     "As pessoa não mudam quando chegam ao poder, elas se revelam!",
     "Mantenha-se focado mesmo que as pessoas que você ama, estejam em outra sintonia.",
     "Quando é para acontecer, até quem tenta te atrapalhar ajuda.",
