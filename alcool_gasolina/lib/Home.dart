@@ -96,7 +96,7 @@ class _HomeState extends State<Home> {
 
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  labelText: "Preço Álcool, ex: 1.62",
+                  labelText: "Preço Álcool, Ex: 1.62",
                 ),
                 style: TextStyle(
                     color: Colors.black,
@@ -113,7 +113,7 @@ class _HomeState extends State<Home> {
 
                 decoration: InputDecoration(
 
-                  labelText: "Preço Gasolina, ex: 3.99",
+                  labelText: "Preço Gasolina, Ex: 3.99",
 
 
                 ),
