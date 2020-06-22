@@ -14,6 +14,7 @@ class _EntradaRadioButtonState extends State<EntradaRadioButton> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Entrada Radio Button"),
+        backgroundColor: Colors.green,
 
       ),
 
@@ -56,6 +57,21 @@ class _EntradaRadioButtonState extends State<EntradaRadioButton> {
                   });
                 }
             ),
+
+            RaisedButton(
+              color: Colors.blue,
+              textColor: Colors.white,
+              child: Text(
+                "Salvar",
+                style: TextStyle(
+                  fontSize: 20,
+
+                ),
+              ),
+              onPressed: (){
+                print(" res: " + _escolhaUsuario.toString());
+              },
+            )
 
 
 
