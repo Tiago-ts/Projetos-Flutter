@@ -6,6 +6,10 @@ class EntradaSlider extends StatefulWidget {
 }
 
 class _EntradaSliderState extends State<EntradaSlider> {
+
+double valor = 5;
+String laber = "Valor selecionado";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,10 +31,21 @@ class _EntradaSliderState extends State<EntradaSlider> {
           children: <Widget>[
 
             Slider(
-                value: 5,
+                value: valor,
                 min: 0,
                 max: 10,
-                onChanged: null
+                label: laber,
+                divisions: 5,
+                activeColor: Colors.black,
+
+                onChanged: (double novoValor){
+                  print("valor selecionado:  " + novoValor.toString() );
+                  setState(() {
+                    valor = novoValor;
+                    laber = "Valor " + novoValor.toString();
+
+                  });
+                }
             ),
             RaisedButton(
                 child: Text(
@@ -39,7 +54,9 @@ class _EntradaSliderState extends State<EntradaSlider> {
                       fontSize: 20
                   ),
                 ),
-                onPressed: (){}
+                onPressed: (){
+                  
+                }
             )
 
 
