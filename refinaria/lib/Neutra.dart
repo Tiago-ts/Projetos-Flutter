@@ -1,69 +1,18 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
 
-class Desodorizacao extends StatefulWidget {
+class Neutra extends StatefulWidget {
   @override
-  _DesodorizacaoState createState() => _DesodorizacaoState();
+  _NeutraState createState() => _NeutraState();
 }
 
-class _DesodorizacaoState extends State<Desodorizacao> {
-
-  TextEditingController _producao = TextEditingController();
-
-  String _Resultado = " ";
-  String _erro = " ";
-  double _total = 0;
-
-  void _limpar(){
-    _producao.text= "";
-  }
-
-
-
-  void _calcular() {
-    double valor = double.tryParse(_producao.text);
-
-
-    if (valor == null || valor <= 0) {
-      print("Digite um número maior que zero ");
-
-      setState(() {
-        _erro = "Digite um número maior que zero ";
-        _Resultado = " ";
-      });
-    } else {
-      if (valor >= 168000) {
-        setState(() {
-          _erro = " ";
-          _Resultado = " Não houve parada de produção";
-        });
-      } else {
-        _total = valor * 480 / 168000;
-        _total = 480 - _total;
-        var numero = _total.ceil();
-
-        setState(() {
-          _erro = " ";
-          // ignore: undefined_getter
-          _Resultado =
-              " Sua parada de produção foi " +  numero.toString() +" minutos ";
-        });
-      }
-    }
-
-    _limpar();
-
-  }
-
-
+class _NeutraState extends State<Neutra> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Desodorização"),
+          title: Text("Neutralização e Branqueamento"),
           backgroundColor: Color(0xFFf45d27),
         ),
-
 
         body: Center(
           child: Container(
@@ -77,7 +26,7 @@ class _DesodorizacaoState extends State<Desodorizacao> {
                   Padding(
                     padding: EdgeInsets.only(bottom: 20),
                     child: Text(
-                      "Calcule sua parada de produção",
+                      "Calcule sua produção",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 25,
@@ -123,36 +72,24 @@ class _DesodorizacaoState extends State<Desodorizacao> {
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18
                             ),
-                            controller: _producao,
+                            controller: null,
                           ),
                         )
                       ],
                     ),
                   ),
 
-                  Padding(padding: EdgeInsets.only(top: 15),
-                    child: Text(_Resultado ,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.green,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold
-                      ),
-                    ),
-                  ),
-
-
                   Container(
-                    margin: EdgeInsets.only(top:0, left: 0, right: 0, bottom: 15),
+                    margin: EdgeInsets.only(top: 15, left: 0, right: 0, bottom: 30),
                     child: Column(
                       children: <Widget>[
-                        Padding(padding: EdgeInsets.only(top: 5),
+                        Padding(padding: EdgeInsets.only(top: 20),
 
                           child: Text(
-                            _erro ,
+                            "texto2" ,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: Colors.red,
+                                color: Colors.green,
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold
                             ),
@@ -176,7 +113,9 @@ class _DesodorizacaoState extends State<Desodorizacao> {
                       ),
                       color: Color(0xFFf5851f),
 
-                      onPressed: _calcular,
+                      onPressed: (){
+
+                      },
                       shape: new RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(30.0)
                       )

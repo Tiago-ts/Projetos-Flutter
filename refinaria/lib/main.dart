@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:refinaria/Desodorizacao.dart';
 import 'package:refinaria/Hidrogenacao.dart';
 import 'package:refinaria/Interesterificacao.dart';
+import 'package:refinaria/Neutra.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -68,129 +69,10 @@ class _HomeState extends State<Home> {
                   ],
                 ),
               ),
-
               Container(
-                margin: EdgeInsets.only(top: 16),
+                margin: EdgeInsets.only(top: 14),
 
-               height: 50,
-                width: MediaQuery.of(context).size.width/1.2,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors:[
-                      Color(0xFFf45d27),
-                      Color(0xFFf5851f)
-                    ]
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(50)
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black,
-                      blurRadius: 5,
-
-                    )
-                  ]
-                ),
-
-               child: Center(
-                 child: Text(
-                   "Desodorização",
-                   style: TextStyle(
-                     fontSize: 22,
-                     fontWeight: FontWeight.bold,
-                     color: Colors.white
-
-                   ),
-                 ),
-               ),
-
-
-              ),
-
-              Container(
-                margin: EdgeInsets.only(top: 16),
-
-                height: 50,
-                width: MediaQuery.of(context).size.width/1.2,
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        colors:[
-                          Color(0xFFf45d27),
-                          Color(0xFFf5851f)
-                        ]
-                    ),
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(50)
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black,
-                        blurRadius: 5,
-
-                      )
-                    ]
-
-                ),
-
-                child: Center(
-                  child: Text(
-                    "Hidrogenação",
-                    style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white
-
-                    ),
-                  ),
-                ),
-              ),
-
-
-              Container(
-                margin: EdgeInsets.only(top: 16),
-
-                height: 50,
-                width: MediaQuery.of(context).size.width/1.2,
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        colors:[
-                          Color(0xFFf45d27),
-                          Color(0xFFf5851f)
-                        ]
-                    ),
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(50)
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black,
-                        blurRadius: 5,
-
-                      )
-                    ]
-
-                ),
-
-                child: Center(
-                  child: Text(
-                    "Interesterificação",
-                    style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white
-
-                    ),
-                  ),
-                ),
-              ),
-
-
-              Container(
-                margin: EdgeInsets.only(top: 16),
-
-                height: 50,
-                width: MediaQuery.of(context).size.width/1.2,
+                width: MediaQuery.of(context).size.width/1.15,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
                         colors:[
@@ -210,20 +92,231 @@ class _HomeState extends State<Home> {
                     ]
                 ),
 
-
                 child: Center(
+                  child:Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
 
-                  child: Text(
-                    "Neutralização e Branqueamento",
-                    style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white
+                      RaisedButton(
+                          padding: EdgeInsets.all(12),
+                          child: Text(
+                            "Desodorização",
+                            style: TextStyle(
+                              fontSize:23,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
 
-                    ),
+
+                            ),
+                          ),
+                          color: Color(0xFFf5851f),
+
+
+                          onPressed: (){
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Desodorizacao()
+                                )
+                            );
+                          },
+                          shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(30.0))
+                      ),
+
+
+                    ],
                   ),
                 ),
               ),
+              Container(
+                margin: EdgeInsets.only(top: 14),
+
+                width: MediaQuery.of(context).size.width/1.15,
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        colors:[
+                          Color(0xFFf45d27),
+                          Color(0xFFf5851f)
+                        ]
+                    ),
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(50)
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black,
+                        blurRadius: 5,
+
+                      )
+                    ]
+                ),
+
+                child: Center(
+                  child:Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+
+                      RaisedButton(
+                          padding: EdgeInsets.all(12),
+                          child: Text(
+                            "Hidrogenação",
+                            style: TextStyle(
+                              fontSize:23,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+
+
+                            ),
+                          ),
+                          color: Color(0xFFf5851f),
+
+
+                          onPressed: (){
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Hidrogenacao()
+                                )
+                            );
+                          },
+                          shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(30.0))
+                      ),
+
+
+                    ],
+                  ),
+                ),
+              ),
+
+
+              Container(
+                margin: EdgeInsets.only(top: 14),
+
+                width: MediaQuery.of(context).size.width/1.15,
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        colors:[
+                          Color(0xFFf45d27),
+                          Color(0xFFf5851f)
+                        ]
+                    ),
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(50)
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black,
+                        blurRadius: 5,
+
+                      )
+                    ]
+                ),
+
+                child: Center(
+                  child:Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+
+                      RaisedButton(
+                          padding: EdgeInsets.all(12),
+                          child: Text(
+                            "Interesterificação",
+                            style: TextStyle(
+                              fontSize:23,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+
+
+                            ),
+                          ),
+                          color: Color(0xFFf5851f),
+
+
+                          onPressed: (){
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Interesterificacao()
+                                )
+                            );
+                          },
+                          shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(30.0))
+                      ),
+
+
+                    ],
+                  ),
+                ),
+              ),
+
+              Container(
+                margin: EdgeInsets.only(top: 14),
+
+                width: MediaQuery.of(context).size.width/1.15,
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        colors:[
+                          Color(0xFFf45d27),
+                          Color(0xFFf5851f)
+                        ]
+                    ),
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(50)
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black,
+                        blurRadius: 5,
+
+                      )
+                    ]
+                ),
+
+                child: Center(
+                  child:Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+
+                      RaisedButton(
+                          padding: EdgeInsets.all(12),
+                          child: Text(
+                            "Neutralização e Branqueamento",
+                            style: TextStyle(
+                              fontSize:23,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+
+
+                            ),
+                          ),
+                          color: Color(0xFFf5851f),
+
+
+                          onPressed: (){
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Neutra()
+                                )
+                            );
+                          },
+                          shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(30.0))
+                      ),
+
+
+                    ],
+                  ),
+                ),
+              ),
+
+
+
+
+
             ],
           ),
         ),
