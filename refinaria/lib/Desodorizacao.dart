@@ -121,7 +121,7 @@ class _DesodorizacaoState extends State<Desodorizacao> {
                             style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 18
+                                fontSize: 20
                             ),
                             controller: _producao,
                           ),
@@ -135,7 +135,7 @@ class _DesodorizacaoState extends State<Desodorizacao> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.green,
-                          fontSize: 22,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold
                       ),
                     ),
@@ -153,7 +153,7 @@ class _DesodorizacaoState extends State<Desodorizacao> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: Colors.red,
-                                fontSize: 22,
+                                fontSize: 18,
                                 fontWeight: FontWeight.bold
                             ),
                           ),

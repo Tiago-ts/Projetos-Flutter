@@ -31,13 +31,13 @@ class _HidrogenacaoState extends State<Hidrogenacao> {
         _Resultado = " ";
       });
     } else {
-      if (valor >= 168000) {
+      if (valor >= 48000) {
         setState(() {
           _erro = " ";
           _Resultado = " Não houve parada de produção";
         });
       } else {
-        _total = valor * 480 / 168000;
+        _total = valor * 480 / 48000;
         _total = 480 - _total;
         var numero = _total.ceil();
 
@@ -120,7 +120,7 @@ class _HidrogenacaoState extends State<Hidrogenacao> {
                             style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 18
+                                fontSize: 20
                             ),
                             controller: _producao,
                           ),
@@ -134,7 +134,7 @@ class _HidrogenacaoState extends State<Hidrogenacao> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.green,
-                          fontSize: 22,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold
                       ),
                     ),
@@ -152,7 +152,7 @@ class _HidrogenacaoState extends State<Hidrogenacao> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: Colors.red,
-                                fontSize: 22,
+                                fontSize: 18,
                                 fontWeight: FontWeight.bold
                             ),
                           ),

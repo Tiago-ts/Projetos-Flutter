@@ -120,7 +120,7 @@ class _NeutraState extends State<Neutra> {
                             style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 18
+                                fontSize: 20
                             ),
                             controller: _producao,
                           ),
@@ -134,7 +134,7 @@ class _NeutraState extends State<Neutra> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.green,
-                          fontSize: 22,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold
                       ),
                     ),
@@ -152,7 +152,7 @@ class _NeutraState extends State<Neutra> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: Colors.red,
-                                fontSize: 22,
+                                fontSize: 18,
                                 fontWeight: FontWeight.bold
                             ),
                           ),
