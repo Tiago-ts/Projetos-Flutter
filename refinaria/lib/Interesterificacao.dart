@@ -6,13 +6,63 @@ class Interesterificacao extends StatefulWidget {
 }
 
 class _InteresterificacaoState extends State<Interesterificacao> {
+
+  TextEditingController _producao = TextEditingController();
+
+  String _Resultado = " ";
+  String _erro = " ";
+  double _total = 0;
+
+  void _limpar(){
+    _producao.text= "";
+  }
+
+
+
+  void _calcular() {
+    double valor = double.tryParse(_producao.text);
+
+
+    if (valor == null || valor <= 0) {
+      print("Digite um número maior que zero ");
+
+      setState(() {
+        _erro = "Digite um número maior que zero ";
+        _Resultado = " ";
+      });
+    } else {
+      if (valor >= 168000) {
+        setState(() {
+          _erro = " ";
+          _Resultado = " Não houve parada de produção";
+        });
+      } else {
+        _total = valor * 480 / 168000;
+        _total = 480 - _total;
+        var numero = _total.ceil();
+
+        setState(() {
+          _erro = " ";
+          // ignore: undefined_getter
+          _Resultado =
+              " Sua parada de produção foi " +  numero.toString() +" minutos ";
+        });
+      }
+    }
+
+    _limpar();
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Interesterificação"),
-        backgroundColor: Color(0xFFf45d27),
-      ),
+        appBar: AppBar(
+          title: Text("Interesterificação"),
+          backgroundColor: Color(0xFFf45d27),
+        ),
+
 
         body: Center(
           child: Container(
@@ -26,7 +76,7 @@ class _InteresterificacaoState extends State<Interesterificacao> {
                   Padding(
                     padding: EdgeInsets.only(bottom: 20),
                     child: Text(
-                      "Calcule sua produção",
+                      "Calcule sua parada de produção",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 25,
@@ -72,24 +122,36 @@ class _InteresterificacaoState extends State<Interesterificacao> {
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18
                             ),
-                            controller: null,
+                            controller: _producao,
                           ),
                         )
                       ],
                     ),
                   ),
 
+                  Padding(padding: EdgeInsets.only(top: 15),
+                    child: Text(_Resultado ,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+
+
                   Container(
-                    margin: EdgeInsets.only(top: 15, left: 0, right: 0, bottom: 30),
+                    margin: EdgeInsets.only(top:0, left: 0, right: 0, bottom: 15),
                     child: Column(
                       children: <Widget>[
-                        Padding(padding: EdgeInsets.only(top: 20),
+                        Padding(padding: EdgeInsets.only(top: 5),
 
                           child: Text(
-                            "texto2" ,
+                            _erro ,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: Colors.green,
+                                color: Colors.red,
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold
                             ),
@@ -113,9 +175,7 @@ class _InteresterificacaoState extends State<Interesterificacao> {
                       ),
                       color: Color(0xFFf5851f),
 
-                      onPressed: (){
-
-                      },
+                      onPressed: _calcular,
                       shape: new RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(30.0)
                       )
