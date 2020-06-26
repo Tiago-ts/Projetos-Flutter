@@ -70,7 +70,7 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 14),
+                margin: EdgeInsets.only(top: 18),
 
                 width: MediaQuery.of(context).size.width/1.15,
                 decoration: BoxDecoration(
@@ -307,19 +307,29 @@ class _HomeState extends State<Home> {
                               borderRadius: new BorderRadius.circular(30.0))
                       ),
 
-
                     ],
+
                   ),
+
                 ),
+
               ),
-
-
-
-
 
             ],
           ),
         ),
+
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Color(0xFFf5851f),
+
+            onPressed: (){},
+
+            tooltip: 'Increment',
+
+
+            child: Icon(Icons.add),
+
+      ),
     );
   }
 }
