@@ -14,7 +14,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text("ATM Consultoria"),
@@ -25,11 +25,15 @@ class _HomeState extends State<Home> {
       body: Container(
         padding: EdgeInsets.all(16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+
             Image.asset("imagens/logo.png"),
             Padding(
               padding: EdgeInsets.only(top: 32),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   GestureDetector(
                     onTap: _abrirEmpresa,
@@ -46,6 +50,7 @@ class _HomeState extends State<Home> {
             Padding(
               padding: EdgeInsets.only(top: 32),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   GestureDetector(
                     onTap: _abrirEmpresa,
