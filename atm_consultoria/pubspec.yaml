@@ -45,6 +45,7 @@ flutter:
   - imagens/detalhe_cliente.png
   - imagens/detalhe_empresa.png
   - imagens/detalhe_servico.png
+  - imagens/detalhe_contato.png
   - imagens/menu_cliente.png
   - imagens/menu_contato.png
   - imagens/menu_empresa.png
