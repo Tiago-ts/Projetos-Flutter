@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cara_ou_coroa/Resultado.dart';
+import 'dart:math';
 
 class Home extends StatefulWidget {
   @override
@@ -7,10 +8,20 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  
+
+
+
   void _exibirResultado(){
+
+    var item = ["cara", "coroa"];
+    var numero = Random().nextInt(item.length);
+
+    print(numero);
+
+    var resultado = item[numero];
+
     Navigator.push(context,
-        MaterialPageRoute(builder: (context) => Resultado())
+        MaterialPageRoute(builder: (context) => Resultado(resultado))
     );
     
   }

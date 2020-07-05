@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Resultado extends StatefulWidget {
+
+  String valor;
+  Resultado(this.valor);
+
   @override
   _ResultadoState createState() => _ResultadoState();
 }
@@ -8,6 +12,17 @@ class Resultado extends StatefulWidget {
 class _ResultadoState extends State<Resultado> {
   @override
   Widget build(BuildContext context) {
+
+    //print(widget.valor);
+    var caminhoImagem = "imagens/moeda_cara.png";
+
+    if(widget.valor == "cara"){
+      caminhoImagem = "imagens/moeda_cara.png";
+    } else {
+      caminhoImagem = "imagens/moeda_coroa.png";
+    }
+
+
     return Scaffold(
       backgroundColor: Color(0xff61bd86),
       //backgroundColor: Color(0xffffcc80),
@@ -17,13 +32,13 @@ class _ResultadoState extends State<Resultado> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Image.asset("imagens/moeda_cara.png"),
+            Image.asset(caminhoImagem),
 
             GestureDetector(
               onTap:() {
                 Navigator.pop(context);
               },
-              
+
               child: Image.asset("imagens/botao_voltar.png"),
             )
           ],
