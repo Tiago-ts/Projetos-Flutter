@@ -1,24 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:cara_ou_coroa/Resultado.dart';
 
-class Home extends StatefulWidget {
+class Resultado extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _ResultadoState createState() => _ResultadoState();
 }
 
-class _HomeState extends State<Home> {
-  
-  void _exibirResultado(){
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => Resultado())
-    );
-    
-  }
-  
+class _ResultadoState extends State<Resultado> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       backgroundColor: Color(0xff61bd86),
       //backgroundColor: Color(0xffffcc80),
       //backgroundColor: Color.fromRGBO(255, 204, 128, 0.8),
@@ -27,10 +17,14 @@ class _HomeState extends State<Home> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Image.asset("imagens/logo.png"),
+            Image.asset("imagens/moeda_cara.png"),
+
             GestureDetector(
-              onTap: _exibirResultado,
-              child: Image.asset("imagens/botao_jogar.png"),
+              onTap:() {
+                Navigator.pop(context);
+              },
+              
+              child: Image.asset("imagens/botao_voltar.png"),
             )
           ],
         ),
