@@ -11,6 +11,8 @@ class _HomeState extends State<Home> {
 
   void _carregarItens(){
 
+    _itens = [];
+
     for(int i=0; i<10; i++){
 
       Map<String, dynamic> item = Map();
@@ -48,6 +50,28 @@ class _HomeState extends State<Home> {
             //print("item ${_itens[indice].toString()}");
             
             return ListTile(
+              //click
+              onTap: (){
+               // print("click ${indice}")
+                showDialog(
+                    context: context,
+                  builder: (context){
+                      return AlertDialog(
+                        title: Text("Título ${indice}"),
+                        content: Text("conteúdo ${indice}"),
+                      );
+                  }
+                  
+                );
+              },
+              
+              
+              //pressionando
+              onLongPress: (){
+               // print("pressionando ${indice}")
+                
+              },
+              
               title: Text(
                 _itens[indice]["titulo"],
                 style: TextStyle(
