@@ -56,11 +56,40 @@ class _HomeState extends State<Home> {
                 showDialog(
                     context: context,
                   builder: (context){
+
                       return AlertDialog(
-                        title: Text("Título ${indice}"),
+
+                        title: Text( _itens[indice]["titulo"],
+                            style: TextStyle(
+                            color: Colors.green
+                        ),
+                        ),
+                        titlePadding: EdgeInsets.all(20),
+
                         content: Text("conteúdo ${indice}"),
+                        actions: <Widget>[
+                          FlatButton(
+                              onPressed: (){
+                                print("selecionado sim");
+                                
+                              },
+                              child: Text("sim")
+                          ),
+                          FlatButton(
+                              onPressed: (){
+                                print("selecionado não");
+
+                              },
+                              child: Text("Não")
+                          ),
+                          
+                        ],
+
+                        //contend padding
+                       // contentPadding: EdgeInsets.all(20),
                       );
-                  }
+
+                  },
                   
                 );
               },
@@ -68,8 +97,46 @@ class _HomeState extends State<Home> {
               
               //pressionando
               onLongPress: (){
-               // print("pressionando ${indice}")
-                
+                showDialog(
+                  context: context,
+                  builder: (context){
+
+                    return AlertDialog(
+
+                      title: Text( "Excluir",
+                        style: TextStyle(
+                            color: Colors.red
+                        ),
+                      ),
+                      titlePadding: EdgeInsets.all(20),
+
+                      content: Text("o arquivo"),
+                      actions: <Widget>[
+                        FlatButton(
+                            onPressed: (){
+                              print("excluir sim");
+
+                            },
+                            child: Text("sim")
+                        ),
+                        FlatButton(
+                            onPressed: (){
+                              print("excluir não");
+
+                            },
+                            child: Text("Não")
+                        ),
+
+                      ],
+
+                      //contend padding
+                      // contentPadding: EdgeInsets.all(20),
+                    );
+
+                  },
+
+                );
+
               },
               
               title: Text(
