@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:consumo_servicos/Post.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
@@ -13,83 +14,51 @@ class _HomeState extends State<Home> {
 
   String _urlBase = "https://jsonplaceholder.typicode.com";
 
-
-  Future<Map> _RecuperarPost() async{
-
-    String url = "https://blockchain.info/ticker";
-    http.Response response = await http.get(url);
-
-    return json.decode(response.body);
+  Future<List<Post>> _recuperarPost(){
 
   }
 
   @override
   Widget build(BuildContext context) {
 
-    return FutureBuilder<Map>(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("conumo de serviços"),
+      ),
+      body: FutureBuilder<Map>(
 
-        future: null,
-        builder: (context, snapshot){
+          future: null,
+          builder: (context, snapshot){
 
-          String resultado;
 
-          switch(snapshot.connectionState){
+            switch(snapshot.connectionState){
 
-            case ConnectionState.done:
-              if(snapshot.hasError){
-                resultado = "Erro ao carregar os dados";
-              } else {
+              case ConnectionState.done:
+                if(snapshot.hasError){
 
-              }
-              break;
+                } else {
 
-            case ConnectionState.waiting:
-              resultado = "Carregando..";
-              break;
+                }
 
-            case ConnectionState.none:
-              break;
+                break;
 
-            case ConnectionState.active:
-              break;
-          }
-          return Scaffold(
+              case ConnectionState.waiting:
 
-            body: Container(
+                break;
 
-              padding: EdgeInsets.all(32),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(top: 30, bottom: 30),
-                      child: Text(
-                        resultado,
-                        style: TextStyle(
-                            fontSize: 35
-                        ),
-                      ),
-                    ),
-                    RaisedButton(
-                      child: Text(
-                        "Atualizar",
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white
-                        ),
-                      ),
-                      color: Colors.orange,
-                      padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
-                      onPressed: null,
+              case ConnectionState.none:
+                break;
 
-                    )
-                  ],
-                ),
-              ),
-            ),
-          );
-        }
+              case ConnectionState.active:
+                break;
+            }
+
+            return Center(
+              child: Text(""),
+            );
+
+          },
+      ),
     );
   }
 }
