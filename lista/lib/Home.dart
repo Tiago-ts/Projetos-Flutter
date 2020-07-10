@@ -71,6 +71,9 @@ class _HomeState extends State<Home> {
                           FlatButton(
                               onPressed: (){
                                 print("selecionado sim");
+
+                                //fechar dialog
+                                Navigator.pop(context);
                                 
                               },
                               child: Text("sim")
@@ -78,6 +81,8 @@ class _HomeState extends State<Home> {
                           FlatButton(
                               onPressed: (){
                                 print("selecionado não");
+                                //fechar dialog
+                                Navigator.pop(context);
 
                               },
                               child: Text("Não")
