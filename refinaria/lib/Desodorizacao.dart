@@ -12,9 +12,9 @@ class _DesodorizacaoState extends State<Desodorizacao> {
 
   TextEditingController _producao = TextEditingController();
 
-  String _Resultado = " ";
-  String _erro = " ";
-  double _total = 0;
+  String _Resultado = " "; // ignore: ambiguous_import
+  String _erro = " ";// ignore: ambiguous_import
+  double _total = 0;// ignore: ambiguous_import
 
   void _limpar(){
     _producao.text= "";
@@ -23,7 +23,7 @@ class _DesodorizacaoState extends State<Desodorizacao> {
 
 
   void _calcular() {
-    double valor = double.tryParse(_producao.text);
+    double valor = double.tryParse(_producao.text);// ignore: ambiguous_import
 
 
     if (valor == null || valor <= 0) {
