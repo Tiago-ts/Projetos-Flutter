@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'Mapas.dart';
+
 
 class Home extends StatefulWidget {
   @override
@@ -24,6 +26,13 @@ class _HomeState extends State<Home> {
   }
 
   _adicionarLocal(){
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+           builder: (_) => Mapas()
+
+    )
+    );
 
   }
 

@@ -27,6 +27,7 @@ class _Tela_aberturaState extends State<Tela_abertura> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Container(
         color: Color(0xff0066cc),
