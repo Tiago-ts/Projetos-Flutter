@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:refinaria/Desodorizacao.dart';
 import 'package:refinaria/Hidrogenacao.dart';
