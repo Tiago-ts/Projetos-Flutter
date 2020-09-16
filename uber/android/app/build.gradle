@@ -23,6 +23,7 @@ if (flutterVersionName == null) {
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.google.gms.google-services'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
@@ -41,9 +42,9 @@ android {
         applicationId "com.example.uber"
         minSdkVersion 16
         targetSdkVersion 28
-        multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -62,11 +63,5 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
-apply plugin: 'com.google.gms.google-services'
 
-dependencies {
-    // add the Firebase SDK for Google Analytics
-    implementation 'com.google.firebase:firebase-analytics:17.5.0'
-    // add SDKs for any other desired Firebase products
-    // https://firebase.google.com/docs/android/setup#available-libraries
-}
+
