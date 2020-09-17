@@ -84,10 +84,8 @@ class _HomeState extends State<Home> {
     });
 
     switch( tipoUsuario ){
-
       case "motorista" :
         Navigator.pushReplacementNamed(context, "/painel-motorista");
-
         break;
       case "passageiro" :
         Navigator.pushReplacementNamed(context, "/painel-passageiro");
@@ -195,9 +193,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 _carregando
-                    ? Center(
-                  child: CircularProgressIndicator(backgroundColor: Colors.white,),
-                )
+                    ? Center(child: CircularProgressIndicator(backgroundColor: Colors.white,),)
                     : Container(),
                 Padding(
                   padding: EdgeInsets.only(top: 16),
