@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:slide/modal/Slide.dart';
 
 class SlideItem extends StatelessWidget {
+
+  final int index;
+  SlideItem(this.index);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -13,7 +18,7 @@ class SlideItem extends StatelessWidget {
           height: 200,
           decoration: BoxDecoration(
               shape: BoxShape.circle,
-              image: DecorationImage(image: AssetImage("imagens/01.png"),
+              image: DecorationImage(image: AssetImage(slideList[index].imageUrl),
                   fit: BoxFit.cover
               )
           ),
@@ -23,7 +28,7 @@ class SlideItem extends StatelessWidget {
         ),
 
         Text(
-            "Bem vindo!",
+            slideList[index].titulo,
             style: TextStyle(
               fontSize: 22,
               color: Theme.of(context).primaryColor,
@@ -33,7 +38,7 @@ class SlideItem extends StatelessWidget {
           height: 10,
         ),
         Text(
-          "Bem vindo ao Motorcycle faça seu cadastro",
+          slideList[index].descricao,
           style: TextStyle(
             fontSize: 16,
           ),
