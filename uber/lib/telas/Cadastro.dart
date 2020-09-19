@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:uber/modal/Usuario.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-
-
+import 'package:uber/modal/Usuario.dart';
 
 class Cadastro extends StatefulWidget {
   @override
@@ -77,9 +74,7 @@ class _CadastroState extends State<Cadastro> {
           .setData( usuario.toMap() );
 
       //redireciona para o painel, de acordo com o tipoUsuario
-
       switch( usuario.tipoUsuario ){
-
         case "motorista" :
           Navigator.pushNamedAndRemoveUntil(
               context,
@@ -87,7 +82,6 @@ class _CadastroState extends State<Cadastro> {
                   (_) => false
           );
           break;
-
         case "passageiro" :
           Navigator.pushNamedAndRemoveUntil(
               context,
@@ -98,12 +92,10 @@ class _CadastroState extends State<Cadastro> {
       }
 
     }).catchError((error){
-      print("erro app: " + error.toString());
       _mensagemErro = "Erro ao cadastrar usuário, verifique os campos e tente novamente!";
     });
 
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +112,7 @@ class _CadastroState extends State<Cadastro> {
               children: <Widget>[
                 TextField(
                   controller: _controllerNome,
-                 // autofocus: true,
+                  autofocus: true,
                   keyboardType: TextInputType.text,
                   style: TextStyle(fontSize: 20),
                   decoration: InputDecoration(
@@ -150,7 +142,7 @@ class _CadastroState extends State<Cadastro> {
                 TextField(
                   controller: _controllerSenha,
                   obscureText: true,
-                  keyboardType: TextInputType.text,
+                  keyboardType: TextInputType.emailAddress,
                   style: TextStyle(fontSize: 20),
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
