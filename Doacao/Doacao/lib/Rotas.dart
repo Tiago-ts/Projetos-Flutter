@@ -5,6 +5,9 @@ import 'package:Doacao/telas/Hemocentro.dart';
 import 'package:Doacao/telas/Doador.dart';
 import 'package:flutter/material.dart';
 
+
+import 'Login.dart';
+
 class Rotas {
   static Route<dynamic> gerarRotas(RouteSettings settings) {
     final args = settings.arguments;
@@ -24,6 +27,9 @@ class Rotas {
 
       case "/corrida":
         return MaterialPageRoute(builder: (_) => Doacao(args));
+
+      case "/login":
+        return MaterialPageRoute(builder: (_) => Login());
 
       default:
         _erroRota();

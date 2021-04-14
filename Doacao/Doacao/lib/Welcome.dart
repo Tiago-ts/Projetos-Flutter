@@ -3,6 +3,7 @@ import 'package:Doacao/telas/Home.dart';
 import 'package:Doacao/widget/SlideItem.dart';
 import 'package:Doacao/widget/SlideMarcador.dart';
 import 'package:flutter/material.dart';
+import 'Login.dart';
 import 'modal/Slide.dart';
 import 'dart:async';
 
@@ -134,7 +135,8 @@ class _WelcomeState extends State<Welcome> {
       onPressed: (){
     Navigator.push(
     context, MaterialPageRoute(
-    builder: (context) => Home()
+    //builder: (context) => Home()
+    builder: (context) => Login()
     )
     );
     },
