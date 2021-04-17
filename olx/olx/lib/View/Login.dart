@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:olx/View/InputCustomizado.dart';
+import 'package:olx/Widget/InputCustomizado.dart';
 import 'package:olx/Modal/Usuario.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
