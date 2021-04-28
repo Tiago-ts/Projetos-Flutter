@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:olx/Modal/Anuncio.dart';
+import 'package:olx/models/Anuncio.dart';
 
 class ItemAnuncio extends StatelessWidget {
 
@@ -19,10 +19,10 @@ class ItemAnuncio extends StatelessWidget {
       onTap: this.onTapItem,
       child: Card(
         child: Padding(
-            padding: EdgeInsets.all(12),
-            child: Row(children: <Widget>[
+          padding: EdgeInsets.all(12),
+          child: Row(children: <Widget>[
 
-              SizedBox(
+            SizedBox(
               width: 120,
               height: 120,
               child: Image.network(
@@ -37,31 +37,31 @@ class ItemAnuncio extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(
+                  Text(
                       anuncio.titulo,
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold
-                      ),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold
                     ),
-                    Text("R\$ ${anuncio.preco} "),
-                  ],),
+                  ),
+                  Text("R\$ ${anuncio.preco} "),
+                ],),
               ),
             ),
             if( this.onPressedRemover != null ) Expanded(
-        flex: 1,
-        child: FlatButton(
-          color: Colors.red,
-          padding: EdgeInsets.all(10),
-          onPressed: this.onPressedRemover,
-          child: Icon(Icons.delete, color: Colors.white,),
-        ),
-      )
-      //botao remover
+              flex: 1,
+              child: FlatButton(
+                color: Colors.red,
+                padding: EdgeInsets.all(10),
+                onPressed: this.onPressedRemover,
+                child: Icon(Icons.delete, color: Colors.white,),
+              ),
+            )
+            //botao remover
 
-      ],),
-    ),
-    ),
+          ],),
+        ),
+      ),
     );
   }
 }

@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'package:olx/Modal/Anuncio.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:olx/Widget/ItemAnuncio.dart';
-
+import 'package:olx/models/Anuncio.dart';
+import 'package:olx/views/widgets/ItemAnuncio.dart';
 
 class MeusAnuncios extends StatefulWidget {
   @override
@@ -12,7 +12,7 @@ class MeusAnuncios extends StatefulWidget {
 }
 
 class _MeusAnunciosState extends State<MeusAnuncios> {
-
+  
   final _controller = StreamController<QuerySnapshot>.broadcast();
   String _idUsuarioLogado;
 
@@ -23,7 +23,7 @@ class _MeusAnunciosState extends State<MeusAnuncios> {
     _idUsuarioLogado = usuarioLogado.uid;
 
   }
-
+  
   Future<Stream<QuerySnapshot>> _adicionarListenerAnuncios() async {
 
     await _recuperaDadosUsuarioLogado();
@@ -38,49 +38,52 @@ class _MeusAnunciosState extends State<MeusAnuncios> {
     stream.listen((dados){
       _controller.add( dados );
     });
-
+    
   }
 
   _removerAnuncio(String idAnuncio){
 
     Firestore db = Firestore.instance;
     db.collection("meus_anuncios")
-        .document( _idUsuarioLogado )
-        .collection("anuncios")
-        .document( idAnuncio )
-        .delete().then((_){
+      .document( _idUsuarioLogado )
+      .collection("anuncios")
+      .document( idAnuncio )
+      .delete().then((_){
 
-      db.collection("anuncios")
-          .document(idAnuncio)
-          .delete();
+        db.collection("anuncios")
+            .document(idAnuncio)
+            .delete();
 
     });
 
   }
-
+  
   @override
   void initState() {
     super.initState();
     _adicionarListenerAnuncios();
   }
-
+  
   @override
   Widget build(BuildContext context) {
-
+    
     var carregandoDados = Center(
       child: Column(children: <Widget>[
         Text("Carregando anúncios"),
         CircularProgressIndicator()
       ],),
     );
-
+    
     return Scaffold(
       appBar: AppBar(
         title: Text("Meus Anúncios"),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton.extended(
         foregroundColor: Colors.white,
-        child: Icon(Icons.add),
+        icon: Icon(Icons.add),
+        label: Text("Adicionar"),
+        //child: Icon(Icons.add),
         onPressed: (){
           Navigator.pushNamed(context, "/novo-anuncio");
         },
@@ -88,7 +91,7 @@ class _MeusAnunciosState extends State<MeusAnuncios> {
       body: StreamBuilder(
         stream: _controller.stream,
         builder: (context, snapshot){
-
+          
           switch( snapshot.connectionState ){
             case ConnectionState.none:
             case ConnectionState.waiting:
@@ -96,27 +99,27 @@ class _MeusAnunciosState extends State<MeusAnuncios> {
               break;
             case ConnectionState.active:
             case ConnectionState.done:
-
-            //Exibe mensagem de erro
+              
+              //Exibe mensagem de erro
               if(snapshot.hasError)
                 return Text("Erro ao carregar os dados!");
-
+              
               QuerySnapshot querySnapshot = snapshot.data;
 
               return ListView.builder(
                   itemCount: querySnapshot.documents.length,
                   itemBuilder: (_, indice){
-
+                    
                     List<DocumentSnapshot> anuncios = querySnapshot.documents.toList();
                     DocumentSnapshot documentSnapshot = anuncios[indice];
                     Anuncio anuncio = Anuncio.fromDocumentSnapshot(documentSnapshot);
-
+                    
                     return ItemAnuncio(
                       anuncio: anuncio,
                       onPressedRemover: (){
                         showDialog(
                             context: context,
-                            builder: (context){
+                          builder: (context){
                               return AlertDialog(
                                 title: Text("Confirmar"),
                                 content: Text("Deseja realmente excluir o anúncio?"),
@@ -124,9 +127,9 @@ class _MeusAnunciosState extends State<MeusAnuncios> {
 
                                   FlatButton(
                                     child: Text(
-                                      "Cancelar",
+                                        "Cancelar",
                                       style: TextStyle(
-                                          color: Colors.white
+                                          color: Colors.grey
                                       ),
                                     ),
                                     onPressed: (){
@@ -139,7 +142,8 @@ class _MeusAnunciosState extends State<MeusAnuncios> {
                                     child: Text(
                                       "Remover",
                                       style: TextStyle(
-                                          color: Colors.grey
+                                          color: Colors.white
+
                                       ),
                                     ),
                                     onPressed: (){
@@ -151,17 +155,17 @@ class _MeusAnunciosState extends State<MeusAnuncios> {
 
                                 ],
                               );
-                            }
+                          }
                         );
                       },
                     );
                   }
               );
-
+              
           }
-
+          
           return Container();
-
+          
         },
       ),
     );

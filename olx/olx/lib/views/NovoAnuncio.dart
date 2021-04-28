@@ -7,12 +7,11 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:olx/Modal/Anuncio.dart';
-import 'package:olx/Util/Configuracoes.dart';
-import 'package:olx/Widget/BotaoCustomizado.dart';
-import 'package:olx/Widget/InputCustomizado.dart';
+import 'package:olx/models/Anuncio.dart';
+import 'package:olx/util/Configuracoes.dart';
+import 'package:olx/views/widgets/BotaoCustomizado.dart';
+import 'package:olx/views/widgets/InputCustomizado.dart';
 import 'package:validadores/Validador.dart';
-
 
 class NovoAnuncio extends StatefulWidget {
   @override
@@ -54,10 +53,10 @@ class _NovoAnuncioState extends State<NovoAnuncio> {
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                CircularProgressIndicator(),
-                SizedBox(height: 20,),
-                Text("Salvando anúncio...")
-              ],),
+              CircularProgressIndicator(),
+              SizedBox(height: 20,),
+              Text("Salvando anúncio...")
+            ],),
           );
         }
     );
@@ -78,20 +77,20 @@ class _NovoAnuncioState extends State<NovoAnuncio> {
 
     Firestore db = Firestore.instance;
     db.collection("meus_anuncios")
-        .document( idUsuarioLogado )
-        .collection("anuncios")
-        .document( _anuncio.id )
-        .setData( _anuncio.toMap() ).then((_){
+      .document( idUsuarioLogado )
+      .collection("anuncios")
+      .document( _anuncio.id )
+      .setData( _anuncio.toMap() ).then((_){
 
-      //salvar anúncio público
-      db.collection("anuncios")
+        //salvar anúncio público
+        db.collection("anuncios")
           .document( _anuncio.id )
           .setData( _anuncio.toMap() ).then((_){
 
-        Navigator.pop(_dialogContext);
-        Navigator.pop(context);
+            Navigator.pop(_dialogContext);
+            Navigator.pop(context);
 
-      });
+        });
 
     });
 
@@ -154,17 +153,17 @@ class _NovoAnuncioState extends State<NovoAnuncio> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                FormField<List>(
-                  initialValue: _listaImagens,
-                  validator: ( imagens ){
-                    if( imagens.length == 0 ){
-                      return "Necessário selecionar uma imagem!";
-                    }
-                    return null;
-                  },
-                  builder: (state){
-                    return Column(children: <Widget>[
-                      Container(
+              FormField<List>(
+                initialValue: _listaImagens,
+                validator: ( imagens ){
+                  if( imagens.length == 0 ){
+                    return "Necessário selecionar uma imagem!";
+                  }
+                  return null;
+                },
+                builder: (state){
+                  return Column(children: <Widget>[
+                    Container(
                       height: 100,
                       child: ListView.builder(
                           scrollDirection: Axis.horizontal,
@@ -183,18 +182,18 @@ class _NovoAnuncioState extends State<NovoAnuncio> {
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
-                                        Icon(
-                                          Icons.add_a_photo,
-                                          size: 40,
-                                          color: Colors.grey[100],
+                                      Icon(
+                                        Icons.add_a_photo,
+                                        size: 40,
+                                        color: Colors.grey[100],
+                                      ),
+                                      Text(
+                                        "Adicionar",
+                                        style: TextStyle(
+                                          color: Colors.grey[100]
                                         ),
-                                        Text(
-                                          "Adicionar",
-                                          style: TextStyle(
-                                              color: Colors.grey[100]
-                                          ),
-                                        )
-                                      ],),
+                                      )
+                                    ],),
                                   ),
                                 ),
                               );
@@ -211,18 +210,18 @@ class _NovoAnuncioState extends State<NovoAnuncio> {
                                           child: Column(
                                             mainAxisSize: MainAxisSize.min,
                                             children: <Widget>[
-                                              Image.file( _listaImagens[indice] ),
-                                              FlatButton(
-                                                child: Text("Excluir"),
-                                                textColor: Colors.red,
-                                                onPressed: (){
-                                                  setState(() {
-                                                    _listaImagens.removeAt(indice);
-                                                    Navigator.of(context).pop();
-                                                  });
-                                                },
-                                              )
-                                            ],),
+                                            Image.file( _listaImagens[indice] ),
+                                            FlatButton(
+                                              child: Text("Excluir"),
+                                              textColor: Colors.red,
+                                              onPressed: (){
+                                                setState(() {
+                                                  _listaImagens.removeAt(indice);
+                                                  Navigator.of(context).pop();
+                                                });
+                                              },
+                                            )
+                                          ],),
                                         )
                                     );
                                   },
@@ -244,89 +243,89 @@ class _NovoAnuncioState extends State<NovoAnuncio> {
                       ),
                     ),
                     if( state.hasError )
-                    Container(
-                    child: Text(
-                    "[${state.errorText}]",
-                    style: TextStyle(
-                    color: Colors.red, fontSize: 14
+                      Container(
+                        child: Text(
+                          "[${state.errorText}]",
+                          style: TextStyle(
+                            color: Colors.red, fontSize: 14
+                          ),
+                        ),
+                      )
+                  ],);
+                },
+              ),
+
+              Row(children: <Widget>[
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(8),
+                    child: DropdownButtonFormField(
+                      value: _itemSelecionadoEstado,
+                      hint: Text("Estados"),
+                      onSaved: (estado){
+                        _anuncio.estado = estado;
+                      },
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20
+                      ),
+                      items: _listaItensDropEstados,
+                      validator: (valor){
+                        return Validador()
+                            .add(Validar.OBRIGATORIO, msg: "Campo obrigatório")
+                            .valido(valor);
+                      },
+                      onChanged: (valor){
+                        setState(() {
+                          _itemSelecionadoEstado = valor;
+                        });
+                      },
                     ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(8),
+                    child: DropdownButtonFormField(
+                      value: _itemSelecionadoCategoria,
+                      hint: Text("Categorias"),
+                      onSaved: (categoria){
+                        _anuncio.categoria = categoria;
+                      },
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20
+                      ),
+                      items: _listaItensDropCategorias,
+                      validator: (valor){
+                        return Validador()
+                            .add(Validar.OBRIGATORIO, msg: "Campo obrigatório")
+                            .valido(valor);
+                      },
+                      onChanged: (valor){
+                        setState(() {
+                          _itemSelecionadoCategoria = valor;
+                        });
+                      },
                     ),
-                    )
-                    ],);
+                  ),
+                ),
+              ],),
+
+              Padding(
+                padding: EdgeInsets.only(bottom: 15, top: 15),
+                child: InputCustomizado(
+                  hint: "Título",
+                  onSaved: (titulo){
+                    _anuncio.titulo = titulo;
                   },
+                  validator: (valor){
+                    return Validador()
+                        .add(Validar.OBRIGATORIO, msg: "Campo obrigatório")
+                        .valido(valor);
+                  },controller: null,
                 ),
-
-                Row(children: <Widget>[
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.all(8),
-                      child: DropdownButtonFormField(
-                        value: _itemSelecionadoEstado,
-                        hint: Text("Estados"),
-                        onSaved: (estado){
-                          _anuncio.estado = estado;
-                        },
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20
-                        ),
-                        items: _listaItensDropEstados,
-                        validator: (valor){
-                          return Validador()
-                              .add(Validar.OBRIGATORIO, msg: "Campo obrigatório")
-                              .valido(valor);
-                        },
-                        onChanged: (valor){
-                          setState(() {
-                            _itemSelecionadoEstado = valor;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.all(8),
-                      child: DropdownButtonFormField(
-                        value: _itemSelecionadoCategoria,
-                        hint: Text("Categorias"),
-                        onSaved: (categoria){
-                          _anuncio.categoria = categoria;
-                        },
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20
-                        ),
-                        items: _listaItensDropCategorias,
-                        validator: (valor){
-                          return Validador()
-                              .add(Validar.OBRIGATORIO, msg: "Campo obrigatório")
-                              .valido(valor);
-                        },
-                        onChanged: (valor){
-                          setState(() {
-                            _itemSelecionadoCategoria = valor;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                ],),
-
-                Padding(
-                  padding: EdgeInsets.only(bottom: 15, top: 15),
-                  child: InputCustomizado(
-                    hint: "Título",
-                    onSaved: (titulo){
-                      _anuncio.titulo = titulo;
-                    },
-                    validator: (valor){
-                      return Validador()
-                          .add(Validar.OBRIGATORIO, msg: "Campo obrigatório")
-                          .valido(valor);
-                    },controller: null,
-                  ),
-                ),
+              ),
 
                 Padding(
                   padding: EdgeInsets.only(bottom: 15),
@@ -344,7 +343,7 @@ class _NovoAnuncioState extends State<NovoAnuncio> {
                       return Validador()
                           .add(Validar.OBRIGATORIO, msg: "Campo obrigatório")
                           .valido(valor);
-                    },controller: null,
+                    }, controller: null,
                   ),
                 ),
 
@@ -364,7 +363,7 @@ class _NovoAnuncioState extends State<NovoAnuncio> {
                       return Validador()
                           .add(Validar.OBRIGATORIO, msg: "Campo obrigatório")
                           .valido(valor);
-                    }, controller: null,
+                    },controller: null,
                   ),
                 ),
 
@@ -381,28 +380,28 @@ class _NovoAnuncioState extends State<NovoAnuncio> {
                           .add(Validar.OBRIGATORIO, msg: "Campo obrigatório")
                           .maxLength(200, msg: "Máximo de 200 caracteres")
                           .valido(valor);
-                    }, controller: null,
+                    },controller: null,
                   ),
                 ),
 
-                BotaoCustomizado(
-                  texto: "Cadastrar anúncio",
-                  onPressed: (){
-                    if( _formKey.currentState.validate() ){
+              BotaoCustomizado(
+                texto: "Cadastrar anúncio",
+                onPressed: (){
+                  if( _formKey.currentState.validate() ){
 
-                      //salva campos
-                      _formKey.currentState.save();
+                    //salva campos
+                    _formKey.currentState.save();
 
-                      //Configura dialog context
-                      _dialogContext = context;
+                    //Configura dialog context
+                    _dialogContext = context;
 
-                      //salvar anuncio
-                      _salvarAnuncio();
+                    //salvar anuncio
+                    _salvarAnuncio();
 
-                    }
-                  },
-                ),
-              ],),
+                  }
+                },
+              ),
+            ],),
           ),
         ),
       ),

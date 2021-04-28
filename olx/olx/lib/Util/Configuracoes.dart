@@ -33,8 +33,8 @@ class Configuracoes {
     //Categorias
     itensDropCategorias.add(
         DropdownMenuItem(child: Text(
-          "Categoria", style: TextStyle(
-            color: Color(0xff9c27b0)
+            "Categoria", style: TextStyle(
+          color: Color(0xff9c27b0)
         ),
         ), value: null,)
     );

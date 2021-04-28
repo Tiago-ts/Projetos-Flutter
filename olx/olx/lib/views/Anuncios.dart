@@ -1,10 +1,12 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:olx/Modal/Anuncio.dart';
-import 'package:olx/Util/Configuracoes.dart';
-import 'package:olx/Widget/ItemAnuncio.dart';
-import 'dart:async';
+import 'package:olx/main.dart';
+import 'package:olx/models/Anuncio.dart';
+import 'package:olx/util/Configuracoes.dart';
+import 'package:olx/views/widgets/ItemAnuncio.dart';
 
 class Anuncios extends StatefulWidget {
   @override
@@ -89,6 +91,25 @@ class _AnunciosState extends State<Anuncios> {
 
   }
 
+  Future<Stream<QuerySnapshot>> _filtrarAnuncios() async {
+
+    Firestore db = Firestore.instance;
+    Query query = db.collection("anuncios");
+
+    if( _itemSelecionadoEstado != null ){
+      query = query.where("estado", isEqualTo: _itemSelecionadoEstado);
+    }
+    if( _itemSelecionadoCategoria != null ){
+      query = query.where("categoria", isEqualTo: _itemSelecionadoCategoria);
+    }
+
+    Stream<QuerySnapshot> stream = query.snapshots();
+    stream.listen((dados){
+      _controler.add(dados);
+    });
+
+  }
+
   @override
   void initState() {
     super.initState();
@@ -101,6 +122,16 @@ class _AnunciosState extends State<Anuncios> {
 
   @override
   Widget build(BuildContext context) {
+
+    var carregandoDados = Center(
+      child: Column(children: <Widget>[
+
+        Text("Carregando anúncios"),
+        CircularProgressIndicator()
+
+      ],),
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text("OLX"),
@@ -128,16 +159,17 @@ class _AnunciosState extends State<Anuncios> {
               child: DropdownButtonHideUnderline(
                   child: Center(
                     child: DropdownButton(
-                      iconEnabledColor: Color(0xff9c27b0),
+                      iconEnabledColor: temaPadrao.primaryColor,
                       value: _itemSelecionadoEstado,
                       items: _listaItensDropEstados,
                       style: TextStyle(
-                          fontSize: 22,
-                          color: Colors.black
+                        fontSize: 22,
+                        color: Colors.black
                       ),
                       onChanged: (estado){
                         setState(() {
                           _itemSelecionadoEstado = estado;
+                          _filtrarAnuncios();
                         });
                       },
                     ),
@@ -165,6 +197,7 @@ class _AnunciosState extends State<Anuncios> {
                       onChanged: (categoria){
                         setState(() {
                           _itemSelecionadoCategoria = categoria;
+                          _filtrarAnuncios();
                         });
                       },
                     ),
@@ -182,6 +215,8 @@ class _AnunciosState extends State<Anuncios> {
               switch( snapshot.connectionState ){
                 case ConnectionState.none:
                 case ConnectionState.waiting:
+                  return carregandoDados;
+                  break;
                 case ConnectionState.active:
                 case ConnectionState.done:
 
@@ -209,7 +244,11 @@ class _AnunciosState extends State<Anuncios> {
                           return ItemAnuncio(
                             anuncio: anuncio,
                             onTapItem: (){
-
+                              Navigator.pushNamed(
+                                  context,
+                                  "/detalhes-anuncio",
+                                  arguments: anuncio
+                              );
                             },
                           );
 
